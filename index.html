@@ -24,25 +24,7 @@
       scroll-behavior: smooth;
       overflow-x: hidden;
     }
-
-    /* Animated Background Shapes */
-    body::before {
-      content: "";
-      position: fixed;
-      top: -10%; left: -10%;
-      width: 300px; height: 300px;
-      background: rgba(6, 86, 166, 0.1);
-      border-radius: 50%;
-      z-index: -1;
-      animation: float 15s infinite alternate;
-    }
-
-    @keyframes float {
-      from { transform: translate(0, 0); }
-      to { transform: translate(100vw, 100vh); }
-    }
-
-    header {
+   header {
       text-align: center;
       padding: 80px 20px;
       background: rgba(255, 255, 255, 0.3);
@@ -351,3 +333,4 @@
   </script>
 </body>
 </html>
+
