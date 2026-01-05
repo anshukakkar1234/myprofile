@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anshu Kakkar - Professional Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0656a6;
+      --secondary: #74c0fc;
+      --accent: #25D366;
+      --glass: rgba(255, 255, 255, 0.7);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #002855;
+      background: linear-gradient(45deg, #e0f2fe, #bae6fd, #74c0fc);
+      background-attachment: fixed;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background Shapes */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -10%; left: -10%;
+      width: 300px; height: 300px;
+      background: rgba(6, 86, 166, 0.1);
+      border-radius: 50%;
+      z-index: -1;
+      animation: float 15s infinite alternate;
+    }
+
+    @keyframes float {
+      from { transform: translate(0, 0); }
+      to { transform: translate(100vw, 100vh); }
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    header h1 {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      margin: 0;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+
+    nav a:hover { transform: translateY(-2px); color: #000; }
+
+    section {
+      padding: 40px;
+      margin: 60px auto;
+      max-width: 850px;
+      background: var(--glass);
+      backdrop-filter: blur(15px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 40, 85, 0.05);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section:hover {
+      box-shadow: 0 15px 40px rgba(6, 86, 166, 0.15);
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    h2, h3 {
+      color: var(--primary);
+      border-left: 5px solid var(--primary);
+      padding-left: 15px;
+      margin-bottom: 25px;
+    }
+
+    ul { list-style: none; padding: 0; }
+    li {
+      margin: 12px 0;
+      padding-left: 25px;
+      position: relative;
+    }
+    li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .cert-img {
+      width: 100%;
+      border-radius: 12px;
+      transition: 0.4s;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .cert-img:hover { transform: scale(1.05); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    /* Floating WhatsApp UI */
+    .fab {
+      position: fixed;
+      right: 25px; bottom: 25px;
+      background: var(--accent);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+      z-index: 1000;
+      transition: 0.3s;
+    }
+    .fab:hover { transform: scale(1.1); }
+
+    .popup {
+      position: fixed;
+      right: 25px; bottom: 90px;
+      width: 280px;
+      background: white;
+      border-radius: 15px;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .popup header {
+      background: var(--accent);
+      padding: 15px;
+      color: white;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .popup input {
+      margin: 15px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .popup button {
+      margin: 0 15px 15px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Anshu Kakkar</h1>
+    <p>MBA Finance & IT | Tech-Professional</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#tech">Tech</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>A detail-oriented and results-driven <strong>Accounts & Tech-Professional</strong> with expertise in analyzing complex data to derive actionable insights. I bridge the gap between financial accuracy and modern technological efficiency.</p>
+  </section>
+
+  <section id="experience">
+    <h2>Professional Experience</h2>
+    <ul>
+      <li><strong>Accounts & Tech Lead</strong>
+        <ul>
+          <li>Maintained comprehensive sales records with 100% accuracy.</li>
+          <li>Crafted precision-based quotations for effective deal closures.</li>
+          <li>Streamlined administrative workflows using automated tools.</li>
+          <li>Managed high-stakes bank operations and financial reconciliation.</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section id="tech">
+    <h2>Technical Proficiencies</h2>
+    <p>Certified expert in modern productivity and financial tools:</p>
+    <ul>
+      <li><strong>Generative AI:</strong> Foundations by UpGrad & ChatGPT Productivity Agents.</li>
+      <li><strong>Tally Prime:</strong> Level 3 Certified (ID-904373811).</li>
+      <li><strong>MS Office:</strong> Advanced Data Analysis and Visualization.</li>
+    </ul>
+    <div class="cert-grid">
+      <img src="Tally.certificate.png" alt="Tally Certificate" class="cert-img" onerror="this.style.display='none'">
+      <img src="1767061043048.jpg" alt="AI Certificate" class="cert-img" onerror="this.style.display='none'">
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Core Skills</h2>
+    <div class="contact-grid">
+      <div>
+        <h3>Financial Acumen</h3>
+        <ul>
+          <li>Financial Reporting</li>
+          <li>Complex Data Analysis</li>
+          <li>Inventory Management</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Soft Skills</h3>
+        <ul>
+          <li>Problem Solving</li>
+          <li>Team Collaboration</li>
+          <li>Rapid Tech Adaptation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Connect With Me</h2>
+    <div class="contact-grid">
+      <p>📍 Sector-11, Gurgaon, Haryana</p>
+      <p>📞 +91-9667546345</p>
+      <p>✉️ <a href="mailto:Anshukakkar1234@zohomail.in">Anshukakkar1234@zohomail.in</a></p>
+      <p>🔗 <a href="https://www.linkedin.com/in/anshu-kakkar-1aa770145" target="_blank">LinkedIn Profile</a></p>
+    </div>
+  </section>
+
+  <div class="fab" onclick="togglePopup()">
+    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326z"/>
+    </svg>
+    Chat with me
+  </div>
+
+  <div class="popup" id="waPopup">
+    <header>
+      <span>WhatsApp Query</span>
+      <span style="cursor:pointer" onclick="togglePopup()">✕</span>
+    </header>
+    <input id="waMsg" placeholder="How can I help you?">
+    <button onclick="sendMsg()">Send Message</button>
+  </div>
+
+  <footer>
+    <p>© 2026 Anshu Kakkar. Designed for Excellence.</p>
+  </footer>
+
+  <script>
+    // Intersection Observer for Scroll Animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("show");
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll("section").forEach(s => observer.observe(s));
+
+    // WhatsApp Functions
+    function togglePopup() {
+      const p = document.getElementById('waPopup');
+      p.style.display = p.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function sendMsg() {
+      const msg = document.getElementById('waMsg').value || 'Hello Anshu, I saw your portfolio!';
+      window.open(`https://wa.me/919667546345?text=${encodeURIComponent(msg)}`, '_blank');
+      togglePopup();
+    }
+  </script>
+</body>
+</html>
